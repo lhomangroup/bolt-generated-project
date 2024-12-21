@@ -1,5 +1,5 @@
 import express from 'express'
-    import sqlite3 from 'sqlite3'
+    import sqlite3 from 'qlite3'
     import bodyParser from 'body-parser'
     import cors from 'cors'
 
@@ -18,7 +18,7 @@ import express from 'express'
 
     app.post('/api/register', (req, res) => {
       const { name, email, password, role } = req.body
-      db.run("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)", [name, email, password, role], function(err) {
+      db.run("INSERT INTO users (name, email, password, role) VALUES (?,?,?,?)", [name, email, password, role], function(err) {
         if (err) {
           res.json({ success: false, message: err.message })
         } else {
@@ -29,7 +29,7 @@ import express from 'express'
 
     app.post('/api/login', (req, res) => {
       const { email, password } = req.body
-      db.get("SELECT * FROM users WHERE email = ? AND password = ?", [email, password], (err, row) => {
+      db.get("SELECT * FROM users WHERE email =? AND password =?", [email, password], (err, row) => {
         if (err) {
           res.json({ success: false, message: err.message })
         } else if (row) {
@@ -45,19 +45,19 @@ import express from 'express'
       let query = "SELECT * FROM properties"
       const params = []
       if (price) {
-        query += " WHERE price <= ?"
+        query += " WHERE price <=?"
         params.push(price)
       }
       if (location) {
-        query += (params.length > 0 ? " AND" : " WHERE") + " address LIKE ?"
+        query += (params.length > 0? " AND" : " WHERE") + " address LIKE?"
         params.push(`%${location}%`)
       }
       if (type) {
-        query += (params.length > 0 ? " AND" : " WHERE") + " type = ?"
+        query += (params.length > 0? " AND" : " WHERE") + " type =?"
         params.push(type)
       }
       if (duration) {
-        query += (params.length > 0 ? " AND" : " WHERE") + " duration = ?"
+        query += (params.length > 0? " AND" : " WHERE") + " duration =?"
         params.push(duration)
       }
       db.all(query, params, (err, rows) => {
@@ -71,7 +71,7 @@ import express from 'express'
 
     app.get('/api/properties/:id', (req, res) => {
       const { id } = req.params
-      db.get("SELECT * FROM properties WHERE id = ?", [id], (err, row) => {
+      db.get("SELECT * FROM properties WHERE id =?", [id], (err, row) => {
         if (err) {
           res.json({ success: false, message: err.message })
         } else {
@@ -82,11 +82,23 @@ import express from 'express'
 
     app.post('/api/properties', (req, res) => {
       const { title, description, price, address, duration, type, owner_id, latitude, longitude } = req.body
-      db.run("INSERT INTO properties (title, description, price, address, duration, type, owner_id, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [title, description, price, address, duration, type, owner_id, latitude, longitude], function(err) {
+      db.run("INSERT INTO properties (title, description, price, address, duration, type, owner_id, latitude, longitude) VALUES (?,?,?,?,?,?,?,?,?)", [title, description, price, address, duration, type, owner_id, latitude, longitude], function(err) {
         if (err) {
           res.json({ success: false, message: err.message })
         } else {
           res.json({ success: true, message: 'Propriété ajoutée', propertyId: this.lastID })
+        }
+      })
+    })
+
+    app.put('/api/properties/:id', (req, res) => {
+      const { id } = req.params
+      const { title, description, price, address, duration, type, latitude, longitude } = req.body
+      db.run("UPDATE properties SET title =?, description =?, price =?, address =?, duration =?, type =?, latitude =?, longitude =? WHERE id =?", [title, description, price, address, duration, type, latitude, longitude, id], function(err) {
+        if (err) {
+          res.json({ success: false, message: err.message })
+        } else {
+          res.json({ success: true, message: 'Propriété modifiée' })
         }
       })
     })

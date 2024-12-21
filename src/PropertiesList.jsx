@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-    import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'eact'
+    import { Link } from 'eact-router-dom'
     import axios from 'axios'
 
     function PropertiesList() {
@@ -17,14 +17,14 @@ import React, { useState, useEffect } from 'react'
 
       const fetchProperties = () => {
         axios.get('/api/properties', { params: filters })
-          .then(response => setProperties(response.data))
-          .catch(error => console.error(error))
+         .then(response => setProperties(response.data))
+         .catch(error => console.error(error))
       }
 
       const handleFilterChange = (e) => {
         const { name, value } = e.target
         setFilters(prevFilters => ({
-          ...prevFilters,
+         ...prevFilters,
           [name]: value
         }))
       }

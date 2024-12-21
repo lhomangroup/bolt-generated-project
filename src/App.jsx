@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'eact'
     import './index.css'
-    import { Link } from 'react-router-dom'
+    import { Link } from 'eact-router-dom'
 
     function App() {
       return (
@@ -12,6 +12,8 @@ import React from 'react'
             <Link to="/properties/map">Carte des propriétés</Link>
             <Link to="/login">Se connecter</Link>
             <Link to="/register">S'inscrire</Link>
+            <Link to="/create">Créer une annonce</Link>
+            <Link to="/edit/:id">Éditer une annonce</Link>
           </nav>
         </div>
       )

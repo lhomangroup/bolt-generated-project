@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-    import { useParams } from 'react-router-dom'
+import React, { useState, useEffect } from 'eact'
+    import { useParams } from 'eact-router-dom'
     import axios from 'axios'
 
     function PropertyDetails() {
@@ -8,8 +8,8 @@ import React, { useState, useEffect } from 'react'
 
       useEffect(() => {
         axios.get(`/api/properties/${id}`)
-          .then(response => setProperty(response.data))
-          .catch(error => console.error(error))
+         .then(response => setProperty(response.data))
+         .catch(error => console.error(error))
       }, [id])
 
       if (!property) {

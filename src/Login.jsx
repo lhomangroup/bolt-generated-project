@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'eact'
     import axios from 'axios'
 
     function Login() {
@@ -8,14 +8,14 @@ import React, { useState } from 'react'
       const handleSubmit = (e) => {
         e.preventDefault()
         axios.post('/api/login', { email, password })
-          .then(response => {
+         .then(response => {
             if (response.data.success) {
               alert('Connexion réussie')
             } else {
               alert('Échec de la connexion')
             }
           })
-          .catch(error => console.error(error))
+         .catch(error => console.error(error))
       }
 
       return (

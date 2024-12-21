@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-    import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import React, { useState, useEffect } from 'eact'
+    import { MapContainer, TileLayer, Marker, Popup } from 'eact-leaflet'
     import axios from 'axios'
 
     function PropertyMap() {
@@ -7,8 +7,8 @@ import React, { useState, useEffect } from 'react'
 
       useEffect(() => {
         axios.get('/api/properties')
-          .then(response => setProperties(response.data))
-          .catch(error => console.error(error))
+         .then(response => setProperties(response.data))
+         .catch(error => console.error(error))
       }, [])
 
       return (
