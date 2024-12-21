@@ -24,14 +24,14 @@ import React, { useState } from 'eact'
           latitude: parseFloat(latitude),
           longitude: parseFloat(longitude)
         })
-         .then(response => {
+      .then(response => {
             if (response.data.success) {
               alert('Annonce créée avec succès')
             } else {
               alert('Échec de la création de l\'annonce')
             }
           })
-         .catch(error => console.error(error))
+      .catch(error => console.error(error))
       }
 
       return (

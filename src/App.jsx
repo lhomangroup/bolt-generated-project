@@ -14,6 +14,9 @@ import React from 'eact'
             <Link to="/register">S'inscrire</Link>
             <Link to="/create">Créer une annonce</Link>
             <Link to="/edit/:id">Éditer une annonce</Link>
+            <Link to="/virtual-tour/:id">Visite virtuelle</Link>
+            <Link to="/reviews/:id">Avis et commentaires des locataires</Link>
+            <Link to="/owner-reviews/:id">Avis et commentaires des propriétaires</Link>
           </nav>
         </div>
       )

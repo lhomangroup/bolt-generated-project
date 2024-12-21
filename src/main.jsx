@@ -10,6 +10,9 @@ import React from 'eact'
     import PropertyMap from './PropertyMap.jsx'
     import PropertyCreate from './PropertyCreate.jsx'
     import PropertyEdit from './PropertyEdit.jsx'
+    import VirtualTour from './VirtualTour.jsx'
+    import Reviews from './Reviews.jsx'
+    import OwnerReviews from './OwnerReviews.jsx'
 
     ReactDOM.createRoot(document.getElementById('root')).render(
       <React.StrictMode>
@@ -24,6 +27,9 @@ import React from 'eact'
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/create" element={<PropertyCreate />} />
             <Route path="/edit/:id" element={<PropertyEdit />} />
+            <Route path="/virtual-tour/:id" element={<VirtualTour />} />
+            <Route path="/reviews/:id" element={<Reviews />} />
+            <Route path="/owner-reviews/:id" element={<OwnerReviews />} />
           </Routes>
         </Router>
       </React.StrictMode>

@@ -10,14 +10,14 @@ import React, { useState } from 'eact'
       const handleSubmit = (e) => {
         e.preventDefault()
         axios.post('/api/register', { name, email, password, role })
-         .then(response => {
+      .then(response => {
             if (response.data.success) {
               alert('Inscription réussie')
             } else {
               alert('Échec de l\'inscription')
             }
           })
-         .catch(error => console.error(error))
+      .catch(error => console.error(error))
       }
 
       return (

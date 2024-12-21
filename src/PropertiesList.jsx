@@ -17,14 +17,14 @@ import React, { useState, useEffect } from 'eact'
 
       const fetchProperties = () => {
         axios.get('/api/properties', { params: filters })
-         .then(response => setProperties(response.data))
-         .catch(error => console.error(error))
+      .then(response => setProperties(response.data))
+      .catch(error => console.error(error))
       }
 
       const handleFilterChange = (e) => {
         const { name, value } = e.target
         setFilters(prevFilters => ({
-         ...prevFilters,
+      ...prevFilters,
           [name]: value
         }))
       }

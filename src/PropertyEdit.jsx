@@ -16,7 +16,7 @@ import React, { useState } from 'eact'
 
       useEffect(() => {
         axios.get(`/api/properties/${id}`)
-         .then(response => {
+       .then(response => {
             setTitle(response.data.title)
             setDescription(response.data.description)
             setPrice(response.data.price)
@@ -26,7 +26,7 @@ import React, { useState } from 'eact'
             setLatitude(response.data.latitude)
             setLongitude(response.data.longitude)
           })
-         .catch(error => console.error(error))
+       .catch(error => console.error(error))
       }, [id])
 
       const handleSubmit = (e) => {
@@ -41,7 +41,7 @@ import React, { useState } from 'eact'
           latitude: parseFloat(latitude),
           longitude: parseFloat(longitude)
         })
-         .then(response => {
+       .then(response => {
             if (response.data.success) {
               alert('Annonce modifiée avec succès')
               history.push(`/properties/${id}`)
@@ -49,7 +49,7 @@ import React, { useState } from 'eact'
               alert('Échec de la modification de l\'annonce')
             }
           })
-         .catch(error => console.error(error))
+       .catch(error => console.error(error))
       }
 
       return (

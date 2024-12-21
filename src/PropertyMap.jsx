@@ -7,8 +7,8 @@ import React, { useState, useEffect } from 'eact'
 
       useEffect(() => {
         axios.get('/api/properties')
-         .then(response => setProperties(response.data))
-         .catch(error => console.error(error))
+      .then(response => setProperties(response.data))
+      .catch(error => console.error(error))
       }, [])
 
       return (

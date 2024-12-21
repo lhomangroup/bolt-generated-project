@@ -14,6 +14,8 @@ import express from 'express'
     db.serialize(() => {
       db.run("CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT, password TEXT, role TEXT)")
       db.run("CREATE TABLE properties (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, price REAL, address TEXT, duration INTEGER, type TEXT, owner_id INTEGER, latitude REAL, longitude REAL)")
+      db.run("CREATE TABLE virtual_tours (id INTEGER PRIMARY KEY AUTOINCREMENT, property_id INTEGER, video_url TEXT)")
+      db.run("CREATE TABLE reviews (id INTEGER PRIMARY KEY AUTOINCREMENT, property_id INTEGER, rating INTEGER, comment TEXT)")
     })
 
     app.post('/api/register', (req, res) => {
@@ -99,6 +101,50 @@ import express from 'express'
           res.json({ success: false, message: err.message })
         } else {
           res.json({ success: true, message: 'Propriété modifiée' })
+        }
+      })
+    })
+
+    app.post('/api/virtual-tours', (req, res) => {
+      const { property_id, video_url } = req.body
+      db.run("INSERT INTO virtual_tours (property_id, video_url) VALUES (?,?)", [property_id, video_url], function(err) {
+        if (err) {
+          res.json({ success: false, message: err.message })
+        } else {
+          res.json({ success: true, message: 'Visite virtuelle ajoutée' })
+        }
+      })
+    })
+
+    app.get('/api/virtual-tours/:id', (req, res) => {
+      const { id } = req.params
+      db.all("SELECT * FROM virtual_tours WHERE property_id =?", [id], (err, rows) => {
+        if (err) {
+          res.json({ success: false, message: err.message })
+        } else {
+          res.json(rows)
+        }
+      })
+    })
+
+    app.post('/api/reviews', (req, res) => {
+      const { property_id, rating, comment } = req.body
+      db.run("INSERT INTO reviews (property_id, rating, comment) VALUES (?,?,?)", [property_id, rating, comment], function(err) {
+        if (err) {
+          res.json({ success: false, message: err.message })
+        } else {
+          res.json({ success: true, message: 'Avis ajouté' })
+        }
+      })
+    })
+
+    app.get('/api/reviews/:id', (req, res) => {
+      const { id } = req.params
+      db.all("SELECT * FROM reviews WHERE property_id =?", [id], (err, rows) => {
+        if (err) {
+          res.json({ success: false, message: err.message })
+        } else {
+          res.json(rows)
         }
       })
     })
